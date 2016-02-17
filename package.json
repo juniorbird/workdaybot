@@ -4,6 +4,7 @@
   "description": "a bot for slack",
   "main": "index.js",
   "dependencies": {
+    "bluebird": "^3.3.1",
     "body-parser": "^1.15.0",
     "express": "^4.13.4",
     "nodemon": "^1.8.1",
@@ -11,6 +12,7 @@
     "passport-openid": "^0.4.0",
     "path": "^0.12.7",
     "request": "^2.69.0",
+    "request-json": "^0.5.5",
     "socket.io": "^1.4.5"
   },
   "devDependencies": {},
