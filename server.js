@@ -2,6 +2,9 @@ const express = require('express');
 const path = require('path');
 const request = require('request-json');
 const bodyParser = require('body-parser');
+const promise = require('bluebird');
+
+const oauthController = require('./server/auth_controller')
 
 const myToken = {
   ok: true,
@@ -38,33 +41,8 @@ app.post('/slack-auth-receive', function(req, res, next) {
   // console.log(req.body);
 });
 
-app.get('/slack-auth-receive', function (req, res, next) {
-  'use strict';
-  let oauthCode = req.query.code;
-  // console.log(oauthCode);
-  let oauthAccessUrl = 'oauth.access'
-    + '?client_id=21683331090.21683939043'
-    + '&client_secret=c478a5c68facce7f5ae1ee6fd5e3622c'
-    + '&code=' + oauthCode
-    + '&redirect_uri=http://localhost:3030/slack-auth-receive';
-  // res.redirect(oauthAccessUrl);
-
-  let client = request.createClient('https://slack.com/api/');
-  client.get(oauthAccessUrl, function (err, res, body) {
-    if (err) console.log('err', err);
-    if (body) authToken = body;
-  });
-
-  console.log(authToken);
-
-  // request
-  //   .get(oauthAccessUrl)
-  //   .on('response', function (response) {
-  //     console.log(response.headers);
-  //     // response.on('body', function(body) {
-  //     //   console.log(body);
-  //     // })
-  //     console.log('---------------');
-  //     console.log(JSON.stringify(response.body));
-  //   });
+app.get('/slack-auth-receive'
+  , oauthController.getNewToken
+  , function (req, res, next) {
+    console.log(req.oauthToken);
 });
