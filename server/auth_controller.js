@@ -16,11 +16,11 @@ oauthController.getNewToken = function(req, res, next) {
   let client = request.createClient('https://slack.com/api/');
   client.get(oauthAccessUrl, function (err, res, body) {
     if (err) console.log('err', err);
-    if (body) {
+    if (body && body.bot) {
       req.oauthResponse = body;
       req.oauthToken_bot = body.bot.bot_access_token;
       req.oauthToken_client = body.access_token;
-      console.log(req.oauthToken_client);
+      // console.log(req.oauthToken_client);
       next();
     }
   });

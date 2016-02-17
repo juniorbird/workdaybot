@@ -22,7 +22,7 @@ rtmController.connect = function (req, res, next) {
       rtmInfo.users = body.users;
       rtmInfo.url = body.url;
       req.rtminfo = rtmInfo;
-      console.log(req.rtminfo);
+      // console.log(req.rtminfo);
 
       next();
     }
