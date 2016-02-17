@@ -39,5 +39,5 @@ app.post('/slack-auth-receive', function(req, res, next) {
 app.get('/slack-auth-receive'
   , oauthController.getNewToken
   , rtmController.connect
-  , socketController.connect
+  , socketController.startconn
 );
