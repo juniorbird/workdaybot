@@ -3,25 +3,19 @@ const path = require('path');
 const request = require('request-json');
 const bodyParser = require('body-parser');
 const promise = require('bluebird');
+const io = require('socket.io')
+
 
 const oauthController = require('./server/auth_controller');
 const rtmController = require('./server/rtm_controller');
+const socketController = require('./server/socket_controller');
 
-const myToken = {
-  ok: true,
-  access_token: "xoxp-21683331090-21683331218-21685438340-3144486cda",
-  scope: "identify,bot",
-  team_name: "Wade's Test Team",
-  team_id: "T0ML39R2N",
-  bot: {
-    bot_user_id: "U0ML5CWBW",
-    bot_access_token: "xoxb-21685438404-QJ3SbK9hSACWG2YC6iFZ3LK3"
-  }
-}
+// This is a good token we can use for testing if needed
 
 var authToken;
 
 var app = express();
+
 app.use(bodyParser.json());
 
 app.listen(3030);
@@ -45,4 +39,5 @@ app.post('/slack-auth-receive', function(req, res, next) {
 app.get('/slack-auth-receive'
   , oauthController.getNewToken
   , rtmController.connect
+  , socketController.connect
 );
