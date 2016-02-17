@@ -4,7 +4,8 @@ const request = require('request-json');
 const bodyParser = require('body-parser');
 const promise = require('bluebird');
 
-const oauthController = require('./server/auth_controller')
+const oauthController = require('./server/auth_controller');
+const rtmController = require('./server/rtm_controller');
 
 const myToken = {
   ok: true,
@@ -43,6 +44,5 @@ app.post('/slack-auth-receive', function(req, res, next) {
 
 app.get('/slack-auth-receive'
   , oauthController.getNewToken
-  , function (req, res, next) {
-    console.log(req.oauthToken);
-});
+  , rtmController.connect
+);
