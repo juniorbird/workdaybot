@@ -5,6 +5,8 @@ var socketController = {};
 socketController.startconn = function (req, res, next) {
   'use strict';
   let socketURL = req.rtminfo.url;
+  console.log(socketURL);
+  console.log(req.rtminfo.channels);
   let socket = io(socketURL);
   socket.on('connect', function() {
     console.log('connect');
